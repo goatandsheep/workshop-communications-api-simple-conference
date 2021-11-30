@@ -77,12 +77,21 @@
      .catch((error) => {
        console.log(error);
      })
+
  }
 
  // Video Presentation listeners
  VoxeetSDK.videoPresentation.on("started", (participant, stream) => {
    console.log("started", participant, stream)
    addClipNode(participant, stream)
+   
+   //Testing Command Service
+   VoxeetSDK.command
+      .send({payload:'Im a poop'})
+      .catch((err) => {
+        console.error(err);
+      })
+  
    startClipBtn.disabled = true;
    playClipBtn.disabled = true;
    pauseClipBtn.disabled = false;
@@ -167,4 +176,3 @@
      clipNode.parentNode.removeChild(clipNode);
    }
  };
-

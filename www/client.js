@@ -104,3 +104,12 @@ VoxeetSDK.conference.on('streamRemoved', (participant, stream) => {
   removeVideoNode(participant);
   removeParticipantNode(participant);
 });
+
+// Event Recieved for CommandService Object
+//Do stuff with data clientside
+VoxeetSDK.command.on('received',(participant, message) => {
+  const dataParsed = JSON.parse(message);
+  console.log(dataParsed.payload)
+  //Do stuff with data
+
+});
