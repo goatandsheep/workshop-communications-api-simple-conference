@@ -91,7 +91,7 @@
       .catch((err) => {
         console.error(err);
       })
-  
+   const videoElem = document.query
    startClipBtn.disabled = true;
    playClipBtn.disabled = true;
    pauseClipBtn.disabled = false;
