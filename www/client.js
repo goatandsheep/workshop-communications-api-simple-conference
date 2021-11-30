@@ -13,7 +13,7 @@ function updateNameValue(e) {
 
 // URL to the Token Server
 // See example token server:   https://github.com/dolbyio-samples/communications-api-token-server-netlify 
-const tokenServerURL = 'Enter the url to your token server here';
+const tokenServerURL = 'https://shake-it-beatcaps-token-server.netlify.app/api/token-generator';
 
 
 
