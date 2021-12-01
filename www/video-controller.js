@@ -33,7 +33,7 @@ const stopClipBtn = document.getElementById("stop-clip-btn");
 
 let timestamp = 0;
 
-let captionSync;
+let captionSyncInst;
 
 //  start video presentation with a url
 startClipBtn.onclick = () => {
@@ -134,7 +134,7 @@ VoxeetSDK.videoPresentation.on("stopped", (participant, stream) => {
   let videoNode = document.getElementById("video-clip");
   videoNode.pause();
   resetRemoveVideo();
-  captionSync.close();
+  captionSyncInst.close();
 });
 
 var resetRemoveVideo = () => {
@@ -179,7 +179,7 @@ const addClipNode = (participant, stream) => {
     videoContainer.prepend(videoNode);
     const videoClipEl = document.getElementById("video-clip");
     videoNode.prepend(track);
-    captionSync = new CaptionSync(
+    captionSyncInst = new CaptionSync(
       videoClipEl,
       showCueCallback,
       hideCueCallback
@@ -324,8 +324,8 @@ class CaptionSync {
 
   handleCuechange(evt) {
     this._toggle = evt.target.track.activeCues.length;
-    console.log(`${typeof this.showCallback} + ${typeof this.hideCallback}`)
-    console.log(`${this.showCallback} + ${this.hideCallback}`)
+    console.log(`${typeof showCallback} + ${typeof hideCallback}`)
+    console.log(`${showCallback} + ${hideCallback}`)
     if (this._toggle) {
       this.showCallback();
     } else {
