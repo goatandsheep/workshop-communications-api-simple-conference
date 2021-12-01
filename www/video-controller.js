@@ -86,7 +86,7 @@
    addClipNode(participant, stream)
    
     //CaptionSync Init
-    CaptionSync(videoNode, showCallback, hideCallback)
+    const captionsync = new CaptionSync(videoNode, showCallback, hideCallback);
 
    //Testing Command Service
    VoxeetSDK.command
@@ -344,6 +344,6 @@ showCallback = () => {
 
 
 hideCallback = () => {
-  console.log('CaptionSync Show Callback Initiated')
+  console.log('CaptionSync Hide Callback')
   stopVibrate()
 }
