@@ -86,7 +86,7 @@
    addClipNode(participant, stream)
    
     //CaptionSync Init
-   let videoNode = document.getElementById('video-clip')
+   let videoNode = document.getElementById('video-clip');
    const captionsync = new CaptionSync(videoNode, showCallback, hideCallback);
 
    //Testing Command Service
@@ -315,8 +315,9 @@ class CaptionSync {
       this._toggle = false
       for (let elRef = 0, len = tracksList.length; elRef < len; elRef++) {
           const el = tracksList[elRef]
-          el.addEventListener('cuechange', handleCuechange)
+          el.addEventListener('cuechange', this.handleCuechange)
       }
+  
   }
 
   handleCuechange(evt) {
