@@ -162,11 +162,11 @@
        track.kind = "captions";
        track.label = "English";
        track.srclang = "en"
-       track.src = "./assets/test-video.vtt";
-       track.addEventListener("load", () => {
+       track.src = "https://beatcaps-workshop-conference.netlify.app/assets/test-video.vtt";
+       /*track.addEventListener("load", () => {
         this.mode = "showing";
         videoNode.textTrack[0].mode = "showing";
-       });
+       });*/
 
      videoNode = document.createElement('video');
      videoNode.setAttribute('class', 'clip-item'); // style lager
