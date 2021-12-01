@@ -153,6 +153,17 @@
    let videoNode = document.getElementById('video-clip');
 
    if (!videoNode) {
+    let track = document.createElement("track");
+    track.kind = "captions";
+    track.default = true;
+    track.label = "English";
+    track.srclang = "en"
+    // track.src = "./assets/test-video.vtt";
+    track.src = "https://beatcaps-workshop-conference.netlify.app/assets/test-video.vtt";
+    // track.addEventListener("load", () => {
+    //  this.mode = "showing";
+    //  videoNode.textTrack[0].mode = "showing";
+    // });
      videoNode = document.createElement('video');
      videoNode.setAttribute('class', 'clip-item'); // style lager
      videoNode.setAttribute('id', 'video-clip');
@@ -162,21 +173,12 @@
      videoNode.muted = false;
      videoNode.setAttribute("autoplay", 'autoplay');
      videoNode.setAttribute("src", participant.url);;
-     videoNode.addEventListener('loadedmetadata', () => {
-       let track = document.createElement("track");
-       track.kind = "captions";
-       track.label = "English";
-       track.srclang = "en"
-       track.src = "/assets/test-video.vtt";
-       track.addEventListener("load", () => {
-        this.mode = "showing";
-        videoNode.textTrack[0].mode = "showing";
-       });
-       videoNode.prepend(track)
-     });
+    //  videoNode.addEventListener('loadedmetadata', () => {
+    //  });
      
      const videoContainer = document.getElementById('video-container');
      videoContainer.prepend(videoNode)
+     videoNode.prepend(track)
    }
    navigator.attachMediaStream(videoNode, stream);
    playClipBtn.disabled = false;
