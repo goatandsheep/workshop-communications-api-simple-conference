@@ -86,7 +86,8 @@
    addClipNode(participant, stream)
    
     //CaptionSync Init
-    const captionsync = new CaptionSync(videoNode, showCallback, hideCallback);
+   let videoNode = document.getElementById('video-clip')
+   const captionsync = new CaptionSync(videoNode, showCallback, hideCallback);
 
    //Testing Command Service
    VoxeetSDK.command
