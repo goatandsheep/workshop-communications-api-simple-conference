@@ -30,6 +30,7 @@ const startClipBtn = document.getElementById("start-clip-btn");
 const playClipBtn = document.getElementById("play-clip-btn");
 const pauseClipBtn = document.getElementById("pause-clip-btn");
 const stopClipBtn = document.getElementById("stop-clip-btn");
+const muteClipBtn = document.getElementById("mute-clip-btn");
 
 let timestamp = 0;
 
@@ -80,6 +81,17 @@ stopClipBtn.onclick = () => {
     .catch((error) => {
       console.log(error);
     });
+};
+
+muteClipBtn.onclick = () => {
+  VoxeetSDK.videoPresentation
+    .mute()
+    .then(() => {
+      console.log("video Mute");
+    })
+    .catch((error) => {
+      console.log(error)
+    })
 };
 
 // Video Presentation listeners
@@ -337,7 +349,7 @@ class CaptionSync {
     const tracksList = this.vidEl.getElementsByTagName("track");
     for (let elRef = 0, len = tracksList.length; elRef < len; elRef++) {
       const el = tracksList[elRef];
-      el.addEventListener("cuechange", (evt) => this.handleCuechange(evt));
+      el.removeEventListener("cuechange", (evt) => this.handleCuechange(evt));
     }
   }
 }
