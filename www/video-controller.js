@@ -324,8 +324,8 @@ class CaptionSync {
 
   handleCuechange(evt) {
     this._toggle = evt.target.track.activeCues.length;
-    console.log(`${typeof showCallback} + ${typeof hideCallback}`)
-    console.log(`${showCallback} + ${hideCallback}`)
+    console.log(`${typeof this.showCallback} + ${typeof this.hideCallback}`)
+    console.log(`${this.showCallback} + ${this.hideCallback}`)
     if (this._toggle) {
       this.showCallback();
     } else {
