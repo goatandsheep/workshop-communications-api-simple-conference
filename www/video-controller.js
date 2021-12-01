@@ -162,7 +162,7 @@
        track.kind = "captions";
        track.label = "English";
        track.srclang = "en"
-       track.src = "/assets/test-video.vtt";
+       track.src = "./assets/test-video.vtt";
        track.addEventListener("load", () => {
         this.mode = "showing";
         videoNode.textTrack[0].mode = "showing";
