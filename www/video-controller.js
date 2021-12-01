@@ -34,6 +34,7 @@
  let timestamp = 0;
 
 
+ let captionSync;
 
  //  start video presentation with a url
  startClipBtn.onclick = () => {
@@ -135,6 +136,7 @@
    let videoNode = document.getElementById('video-clip');
    videoNode.pause()
    resetRemoveVideo()
+   captionSync.close()
  });
 
  var resetRemoveVideo = () => {
@@ -178,7 +180,7 @@
      const videoContainer = document.getElementById('video-container');
      videoContainer.prepend(videoNode)
      videoNode.prepend(track)
-     const captionsync = new CaptionSync(videoNode, showCallback, hideCallback);
+     captionSync = new CaptionSync(videoNode, showCueCallback, hideCueCallback);
 
    }
    navigator.attachMediaStream(videoNode, stream);
@@ -337,14 +339,14 @@ class CaptionSync {
 }
 
 
-showCallback = () => {
+showCueCallback = () => {
   console.log('CaptionSync Show Callback Initiated')
-  videoShake()
+  videoShake('#video-clip')
   startVibrate()
 }
 
 
-hideCallback = () => {
+hideCueCallback = () => {
   console.log('CaptionSync Hide Callback')
   stopVibrate()
 }
