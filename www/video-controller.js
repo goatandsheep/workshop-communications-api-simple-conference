@@ -91,7 +91,6 @@
       .catch((err) => {
         console.error(err);
       })
-   const videoElem = document.query
    startClipBtn.disabled = true;
    playClipBtn.disabled = true;
    pauseClipBtn.disabled = false;
@@ -163,6 +162,19 @@
      videoNode.muted = false;
      videoNode.setAttribute("autoplay", 'autoplay');
      videoNode.setAttribute("src", participant.url);;
+     videoNode.addEventListener('loadedmetadata', () => {
+       let track = document.createElement("track");
+       track.kind = "captions";
+       track.label = "English";
+       track.srclang = "en"
+       track.src = "/assets/test-video.vtt";
+       track.addEventListener("load", () => {
+        this.mode = "showing";
+        videoNode.textTrack[0].mode = "showing";
+       });
+       videoNode.prepend(track)
+     });
+     
      const videoContainer = document.getElementById('video-container');
      videoContainer.prepend(videoNode)
    }
@@ -176,3 +188,5 @@
      clipNode.parentNode.removeChild(clipNode);
    }
  };
+
+ 
