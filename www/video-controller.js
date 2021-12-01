@@ -155,14 +155,15 @@
 
    if (!videoNode) {
     let track = document.createElement("track");
-       track.kind = "captions";
-       track.label = "English";
-       track.srclang = "en"
-       track.src = "https://beatcaps-workshop-conference.netlify.app/assets/test-video.vtt";
-       /*track.addEventListener("load", () => {
-        this.mode = "showing";
-        videoNode.textTrack[0].mode = "showing";
-       });*/
+    track.kind = "captions";
+    track.label = "English";
+    track.default = true;
+    track.srclang = "en"
+    track.src = "https://beatcaps-workshop-conference.netlify.app/assets/test-video.vtt";
+    /*track.addEventListener("load", () => {
+    this.mode = "showing";
+    videoNode.textTrack[0].mode = "showing";
+    });*/
 
      videoNode = document.createElement('video');
      videoNode.setAttribute('class', 'clip-item'); // style lager
@@ -330,7 +331,7 @@ class CaptionSync {
       const tracksList = vidEl.getElementsByTagName('track')
       for (let elRef = 0, len = tracksList.length; elRef < len; elRef++) {
           const el = tracksList[elRef]
-          el.addEventListener('cuechange', handleCuechange)
+          el.addEventListener('cuechange', this.handleCuechange)
       }
   }
 }
