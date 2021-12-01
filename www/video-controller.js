@@ -84,10 +84,6 @@
  VoxeetSDK.videoPresentation.on("started", (participant, stream) => {
    console.log("started", participant, stream)
    addClipNode(participant, stream)
-   
-    //CaptionSync Init
-   let videoNode = document.getElementById('video-clip');
-   const captionsync = new CaptionSync(videoNode, showCallback, hideCallback);
 
    //Testing Command Service
    VoxeetSDK.command
@@ -177,10 +173,12 @@
      videoNode.muted = false;
      videoNode.setAttribute("autoplay", 'autoplay');
      videoNode.setAttribute("src", participant.url);;
-        
+    
      const videoContainer = document.getElementById('video-container');
      videoContainer.prepend(videoNode)
      videoNode.prepend(track)
+     const captionsync = new CaptionSync(videoNode, showCallback, hideCallback);
+
    }
    navigator.attachMediaStream(videoNode, stream);
    playClipBtn.disabled = false;
