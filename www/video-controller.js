@@ -85,12 +85,16 @@
    console.log("started", participant, stream)
    addClipNode(participant, stream)
    
+    //CaptionSync Init
+    CaptionSync(videoNode, showCallback, hideCallback)
+
    //Testing Command Service
    VoxeetSDK.command
       .send({payload:'Im a poop'})
       .catch((err) => {
         console.error(err);
       })
+
    startClipBtn.disabled = true;
    playClipBtn.disabled = true;
    pauseClipBtn.disabled = false;
@@ -153,6 +157,16 @@
    let videoNode = document.getElementById('video-clip');
 
    if (!videoNode) {
+    let track = document.createElement("track");
+       track.kind = "captions";
+       track.label = "English";
+       track.srclang = "en"
+       track.src = "/assets/test-video.vtt";
+       track.addEventListener("load", () => {
+        this.mode = "showing";
+        videoNode.textTrack[0].mode = "showing";
+       });
+
      videoNode = document.createElement('video');
      videoNode.setAttribute('class', 'clip-item'); // style lager
      videoNode.setAttribute('id', 'video-clip');
@@ -162,21 +176,10 @@
      videoNode.muted = false;
      videoNode.setAttribute("autoplay", 'autoplay');
      videoNode.setAttribute("src", participant.url);;
-     videoNode.addEventListener('loadedmetadata', () => {
-       let track = document.createElement("track");
-       track.kind = "captions";
-       track.label = "English";
-       track.srclang = "en"
-       track.src = "/assets/test-video.vtt";
-       track.addEventListener("load", () => {
-        this.mode = "showing";
-        videoNode.textTrack[0].mode = "showing";
-       });
-       videoNode.prepend(track)
-     });
-     
+        
      const videoContainer = document.getElementById('video-container');
      videoContainer.prepend(videoNode)
+     videoNode.prepend(track)
    }
    navigator.attachMediaStream(videoNode, stream);
    playClipBtn.disabled = false;
@@ -295,10 +298,52 @@ function startVibrate(duration = 10000, interval = 10000, verbose = false) {
 	vibrating = true;
 }
 
-module.exports = {
-	isVibrating,
-	startVibrate,
-	stopVibrate,
-	toggleVibrate,
-  videoShake
-};
+class CaptionSync {
+  /**
+   * Listener for closed captions video events
+   * @constructor
+   * @param {String} vidId 
+   * @param {Function} showCallback callback when cue is shown
+   * @param {Function} hideCallback callback when cue is hidden
+   */
+  constructor(vidEl, showCallback, hideCallback) {
+      this.vidEl = vidEl
+      const tracksList = vidEl.getElementsByTagName('track')
+      this.showCallback = showCallback
+      this.hideCallback = hideCallback
+      this._toggle = false
+      for (let elRef = 0, len = tracksList.length; elRef < len; elRef++) {
+          const el = tracksList[elRef]
+          el.addEventListener('cuechange', handleCuechange)
+      }
+  }
+
+  handleCuechange(evt) {
+      this._toggle = evt.target.track.activeCues.length
+      if (this._toggle) {
+          this.showCallback()
+      } else {
+          this.hideCallback()
+      }
+  }
+  close() {
+      const tracksList = vidEl.getElementsByTagName('track')
+      for (let elRef = 0, len = tracksList.length; elRef < len; elRef++) {
+          const el = tracksList[elRef]
+          el.addEventListener('cuechange', handleCuechange)
+      }
+  }
+}
+
+
+showCallback = () => {
+  console.log('CaptionSync Show Callback Initiated')
+  videoShake()
+  startVibrate()
+}
+
+
+hideCallback = () => {
+  console.log('CaptionSync Show Callback Initiated')
+  stopVibrate()
+}
