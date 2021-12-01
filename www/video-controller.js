@@ -179,8 +179,9 @@
     
      const videoContainer = document.getElementById('video-container');
      videoContainer.prepend(videoNode)
+     const videoClipEl = document.getElementById('video-clip')
      videoNode.prepend(track)
-     captionSync = new CaptionSync(videoNode, showCueCallback, hideCueCallback);
+     captionSync = new CaptionSync(videoClipEl, showCueCallback, hideCueCallback);
 
    }
    navigator.attachMediaStream(videoNode, stream);
@@ -330,7 +331,7 @@ class CaptionSync {
       }
   }
   close() {
-      const tracksList = vidEl.getElementsByTagName('track')
+      const tracksList = this.vidEl.getElementsByTagName('track')
       for (let elRef = 0, len = tracksList.length; elRef < len; elRef++) {
           const el = tracksList[elRef]
           el.addEventListener('cuechange', this.handleCuechange)
@@ -339,14 +340,14 @@ class CaptionSync {
 }
 
 
-showCueCallback = () => {
+const showCueCallback = () => {
   console.log('CaptionSync Show Callback Initiated')
   videoShake('#video-clip')
   startVibrate()
 }
 
 
-hideCueCallback = () => {
+const hideCueCallback = () => {
   console.log('CaptionSync Hide Callback')
   stopVibrate()
 }
