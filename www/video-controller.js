@@ -337,8 +337,6 @@ class CaptionSync {
 
   handleCuechange(evt) {
     this._toggle = evt.target.track.activeCues.length;
-    console.log(`${typeof this.showCallback} + ${typeof this.hideCallback}`)
-    console.log(`${this.showCallback} + ${this.hideCallback}`)
     if (this._toggle) {
       this.showCallback();
     } else {
@@ -349,7 +347,7 @@ class CaptionSync {
     const tracksList = this.vidEl.getElementsByTagName("track");
     for (let elRef = 0, len = tracksList.length; elRef < len; elRef++) {
       const el = tracksList[elRef];
-      el.removeEventListener("cuechange", (evt) => this.handleCuechange(evt));
+      el.addEventListener("cuechange", (evt) => this.handleCuechange(evt));
     }
   }
 }
