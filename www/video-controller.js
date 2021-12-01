@@ -311,6 +311,7 @@ class CaptionSync {
    * @param {Function} hideCallback callback when cue is hidden
    */
   constructor(vidEl, showCallback, hideCallback) {
+
     this.vidEl = vidEl;
     const tracksList = vidEl.getElementsByTagName("track");
     this.showCallback = showCallback;
@@ -318,7 +319,7 @@ class CaptionSync {
     this._toggle = false;
     for (let elRef = 0, len = tracksList.length; elRef < len; elRef++) {
       const el = tracksList[elRef];
-      el.addEventListener("cuechange", this.handleCuechange);
+      el.addEventListener("cuechange", (evt) => this.handleCuechange(evt));
     }
   }
 
@@ -336,7 +337,7 @@ class CaptionSync {
     const tracksList = this.vidEl.getElementsByTagName("track");
     for (let elRef = 0, len = tracksList.length; elRef < len; elRef++) {
       const el = tracksList[elRef];
-      el.addEventListener("cuechange", this.handleCuechange);
+      el.addEventListener("cuechange", (evt) => this.handleCuechange(evt));
     }
   }
 }
