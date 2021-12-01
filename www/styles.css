@@ -1,4 +1,7 @@
 /* app  Styles */
+body {
+    background-color: black;
+}
 
 .flipped-video {
     transform: rotateY(180deg);
