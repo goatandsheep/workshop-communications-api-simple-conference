@@ -158,8 +158,8 @@
     track.default = true;
     track.label = "English";
     track.srclang = "en"
-    // track.src = "./assets/test-video.vtt";
-    track.src = "https://beatcaps-workshop-conference.netlify.app/assets/test-video.vtt";
+    track.src = "./assets/test-video.vtt";
+    // track.src = "https://beatcaps-workshop-conference.netlify.app/assets/test-video.vtt";
     // track.addEventListener("load", () => {
     //  this.mode = "showing";
     //  videoNode.textTrack[0].mode = "showing";
