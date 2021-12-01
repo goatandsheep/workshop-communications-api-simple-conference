@@ -1,8 +1,4 @@
 /* app  Styles */
-body {
-    background-color: black;
-}
-
 .flipped-video {
     transform: rotateY(180deg);
     -webkit-transform: rotateY(180deg); /* Safari and Chrome */
@@ -153,7 +149,7 @@ html {
   }
 
   body {
-    background: #eee;
+    background: black;
     font-family: 'helvetica neue';
     font-weight: 200;
     font-size: 20px;
